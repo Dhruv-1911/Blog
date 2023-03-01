@@ -3,6 +3,7 @@ const Blog = require("../models/M_allblog");
 const Category = require("../models/M_Category")
 
 module.exports = {
+    //get all blog
     getallblog: async (req,res)=>{
         try {
            const blogs = await Blog.find()
@@ -21,7 +22,7 @@ module.exports = {
             res.status(500).json(error)
         }
     },
-
+  //get blog with all Detail
     getblog: async (req, res, next) => {
         try {
             const blogs = await Blog.find()
@@ -34,6 +35,7 @@ module.exports = {
 
     },
 
+    //add blog 
     addblog: async (req, res, next) => {
         Category.findById(req.body.categoryId)
         .then(category=>{
@@ -64,6 +66,7 @@ module.exports = {
 
     },
 
+    //get single blog
     getsingleblog: async (req, res, next) => {
         try {
             const id = req.params.blogId;
@@ -78,6 +81,7 @@ module.exports = {
 
     },
 
+    //update blog
     updateblog: async (req, res, next) => {
         try {
             const id = req.params.blogId;
@@ -95,6 +99,7 @@ module.exports = {
         }
     },
 
+    //delete blog
     deleteblog: async (req, res, next) => {
         try {
             const _id = req.params.blogId

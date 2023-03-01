@@ -4,6 +4,7 @@ const Category = require("../models/M_Category")
 
 module.exports = {
 
+     //get all category
     getcategory: (req, res, next) => {
       Category.find()
       .select('-__v ')
@@ -20,6 +21,7 @@ module.exports = {
       })
     },
 
+     //add category 
     createcategory:(req, res, next) => {
         const category = new Category({
             _id : new mongoose.Types.ObjectId(),
@@ -34,6 +36,7 @@ module.exports = {
         })
     },
 
+    //update category
     updatecategory: async (req, res, next) => {
         try {
             const id =req.params.categoryId
@@ -48,6 +51,7 @@ module.exports = {
         }
     },
 
+    //delete category
     deletecategory: async (req, res, next) => {
         try {
             const id = req.params.categoryId
