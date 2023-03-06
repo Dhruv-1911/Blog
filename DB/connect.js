@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const connect_db =mongoose.connect('mongodb+srv://dhruv:' + process.env.Mongo_password + '@blog.uslpn7g.mongodb.net/?retryWrites=true&w=majority')
+const connect_db =mongoose.connect('mongodb://localhost:27017/Blog')
     .then(() => {
         console.log("Connect to Databse..")
     })

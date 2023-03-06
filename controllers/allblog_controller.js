@@ -7,7 +7,7 @@ module.exports = {
     getallblog: async (req,res)=>{
         try {
            const blogs = await Blog.find()
-            .populate('category category')
+            .populate('category','category')
             res.status(200).json({
                 Total_Blog:blogs.length,
                 blog:blogs.map(blog =>{
@@ -19,21 +19,25 @@ module.exports = {
                 })
             })
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({
+                error:error
+            })
         }
     },
-  //get blog with all Detail
+//blog with all details
     getblog: async (req, res, next) => {
         try {
-            const blogs = await Blog.find()
+          const blogs = await Blog.find()
             .select('-__v')
-            .populate('category category _id')
-            res.status(200).json(blogs)
+            .populate('category', 'category')
+          res.status(200).json(blogs)
         } catch (error) {
-            res.status(500).json(error)
+          res.status(500).json({
+            error: error
+          })
         }
-
-    },
+    
+      },
 
     //add blog 
     addblog: async (req, res, next) => {
@@ -70,7 +74,7 @@ module.exports = {
     getsingleblog: async (req, res, next) => {
         try {
             const id = req.params.blogId;
-            const result = await Blog.findById(id)
+            const result = await Blog.findById(id).populate('category','category')
             res.status(200).json(result)
         }
         catch (error) {

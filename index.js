@@ -2,6 +2,7 @@ const express = require("express")
 const morgan = require("morgan")
 require("dotenv").config();
 const app = express();
+
 PORT = process.env.PORT
 const adminrouter = require("./router/admin")
 const all_blogrouter = require("./router/allblog")
@@ -10,18 +11,20 @@ const search_router = require("./router/user")
 const bodyParser = require("body-parser");
 const connect_db = require("./DB/connect")
 const { search } = require("./router/allblog");
+const favicon = require('serve-favicon');
 
 //middelware
 app.use("/",express.static("uploads"))
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.json());
+app.use(favicon(__dirname + '/blog.ico'));
 
 //all routes
 app.use("/admin", adminrouter);
 app.use("/all_blog",all_blogrouter);
 app.use("/category",category_blogrouter);
-app.use("/blog",search_router)
+app.use("/user",search_router)
 
 
 //cores handling
